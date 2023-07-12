@@ -1,13 +1,13 @@
 {
     "Dólar Oficial": {
-      "compra": 261.5,
-      "venta": 174.5
+      "compra": 262,
+      "venta": 275
     },
     "Dólar Blue": {
       "compra": 490.0,
       "venta": 495.0
     },
-    "Dólar contado con liqui": {
+    "Dólar con liqui": {
       "compra": 480.28,
       "venta": 509.08
     },
