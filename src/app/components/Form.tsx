@@ -9,7 +9,7 @@ interface FormProps {
 
 function Form({value, onChange}: FormProps) {
     return (
-        <form className="mb-2 w-full">
+        <form className=" w-full">
             <label>
                 Monto en ARS:
                 <input className="block rounded-md bg-gray-200 p-2 text-right w-full" 
