@@ -1,3 +1,4 @@
+import { getCotizacion } from '@/app/data/services';
 import { CasaType } from '@/app/models/cotizaciones.model';
 import React from 'react'
 
@@ -7,12 +8,13 @@ interface Props {
     }[];
 }
 
-function CotizacionesList({ lista }: Props) {
-  console.log(lista)
+async function CotizacionesList({ lista }: Props) {
+  const data = await getCotizacion()
+ // console.log(lista)
   return (
-    <div>chau
+    <div>
          {lista?.map((t) => (
-            <p key={t.casa.agencia}>{t.casa.nombre}</p>
+            <p key={t.casa.agencia}>{t.casa.nombre} {t.casa.venta}</p>            
         ))} 
     </div>
   )

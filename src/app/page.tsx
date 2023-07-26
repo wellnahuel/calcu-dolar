@@ -1,31 +1,45 @@
+/* eslint-disable @next/next/no-async-client-component */
 "use client";
 
 import Image from "next/image";
 import React from "react";
 
 import cotizaciones from "./cotizaciones.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Form from "./components/Form";
+import CotizacionesList from "./components/CotizacionesList/CotizacionesList";
+import { getCotizacion } from "./data/services/cotizaciones.service";
 
-const valores = cotizaciones as Record<
+/* const valores = cotizaciones as Record<
   string,
   { compra: number; venta: number }
->;
+>; */
+//
 
-export default function Home() {
-  const [amount, setAmount] = useState(0);
 
+ function Home() {
+  const [amount, setAmount] = useState(0);  
+  const data =  getCotizacion();
+  useEffect (() => {
+    if (data) {
+      console.log(data)
+      setAmount(data)
+    }
+  }, [data])
   return (
-    <main className="grid gap-4 h-full">
-      <section className=" flex-1">
-        <Form
-          value={amount}
-          onChange={(_amount: number) => setAmount(_amount)}
-        />
-      </section>
-      <section className="flex-1 rounded-3xl bg-sky-800 p-8 text-white overflow-y-auto">
-        <ul className="flex flex-col gap-4">
-          {Object.entries(valores).map(
+    <main>      
+      {data && <div>
+        <CotizacionesList lista={data} />
+      </div>}
+    </main>
+  );
+}
+
+export default Home;
+
+/* 
+
+{Object.entries(valores).map(
             ([name, value]: [string, { compra: number; venta: number }]) => {
               const total = amount ? Number(amount / value.venta) : value.venta;
               return (
@@ -54,8 +68,25 @@ export default function Home() {
               );
             }
           )}
+
+*/
+
+/* 
+
+ return (
+    <main className="grid gap-4 h-full">
+      <section className=" flex-1">
+        <Form
+          value={amount}
+          onChange={(_amount: number) => setAmount(_amount)}
+        />
+      </section>
+      <section className="flex-1 rounded-3xl bg-sky-800 p-8 text-white overflow-y-auto">
+        <ul className="flex flex-col gap-4">
+          <CotizacionesList lista={data} />
         </ul>
       </section>
     </main>
   );
-}
+
+*/
