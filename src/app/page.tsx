@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-async-client-component */
 "use client";
 
 import Image from "next/image";
@@ -9,6 +8,8 @@ import { useState, useEffect } from "react";
 import Form from "./components/Form";
 import CotizacionesList from "./components/CotizacionesList/CotizacionesList";
 import { getCotizacion } from "./data/services/cotizaciones.service";
+import { CasaType } from "@/app/models/cotizaciones.model";
+
 
 /* const valores = cotizaciones as Record<
   string,
@@ -16,8 +17,14 @@ import { getCotizacion } from "./data/services/cotizaciones.service";
 >; */
 //
 
+interface Props {
+  lista: {
+    casa: CasaType;
+  }[];
+}
 
-function Home() {
+
+function Home({ lista }: Props) {
   const [amount, setAmount] = useState(0);  
   const [data, setData] = useState(null);
 
@@ -30,17 +37,15 @@ function Home() {
     fetchData();
   }, []);
 
+  
+
   return (
-    <main className="">  
-      <section className=" flex-1">
-        <Form
-          value={amount}
-          onChange={(_amount: number) => setAmount(_amount)}
-        />
-      </section>    
+    <main >  
+          
       {data && <div>
         <CotizacionesList lista={data} />
       </div>}
+     
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import { getCotizacion } from "@/app/data/services";
 import { CasaType } from "@/app/models/cotizaciones.model";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Form from "../Form";
 
 interface Props {
   lista: {
@@ -9,24 +10,55 @@ interface Props {
 }
 
 function CotizacionesList({ lista }: Props) {
+  const [amount, setAmount] = useState(0);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await getCotizacion();
+      setData(result);
+    }
+
+    fetchData();
+  }, []);
+
   return (
-    <div className="flex justify-between">
-      <div>
+    <div >
+      <section className=" flex-1">
+        <Form
+          value={amount}
+          onChange={(_amount: number) => setAmount(_amount)}
+        />
+      </section>
+      <div className="flex justify-around max-[750px]:text-[80%] max-[600px]:w-[98%] max-[580px]:text-[60%]">
+        <div>
+          {lista.length > 0 &&
+            lista.map((t) => <p key={t.casa.agencia}>{t.casa.nombre} </p>)}
+        </div>
+        <div>
+          {lista.length > 0 &&
+            lista.map((t) => (
+              <div className="flex">
+                <div key={t.casa.agencia} className="max-[500px]:hidden">Compra:</div>
+                <div key={t.casa.agencia}>  $ {t.casa.compra} </div>
+              </div>
+              
+
+            ))}
+        </div> 
+        <div>
+          {lista.length > 0 &&
+            lista.map((t) => (
+              <p key={t.casa.agencia}>Venta: $ {t.casa.venta} </p>
+            ))}
+        </div>
+         <div>
         {lista.length > 0 &&
-          lista.map((t) => <p key={t.casa.agencia}>{t.casa.nombre} </p>)}
-      </div>
-      <div>
-        {lista.length > 0 &&
-          lista.map((t) => (
-            <p key={t.casa.agencia}>Compra: $ {t.casa.compra} </p>
-          ))}
-      </div>
-      
-      <div>
-        {lista.length > 0 &&
-          lista.map((t) => (
-            <p key={t.casa.agencia}>Venta: $ {t.casa.venta} </p>
-          ))}
+            lista.map((t) => (
+              
+              <p key={t.casa.agencia}> $XXX.XX</p>
+            ))}
+        </div>
       </div>
     </div>
   );

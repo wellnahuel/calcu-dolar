@@ -12,7 +12,7 @@ function Form({value, onChange}: FormProps) {
         <form className=" w-full">
             <label>
                 Monto en ARS:
-                <input className="block rounded-md bg-gray-200 p-2 text-right w-full" 
+                <input className="block rounded-md bg-gray-200 p-2 text-black text-right w-full" 
                 type="number"
                 value={value}
                 onChange={(e) => onChange(Number(e.target.value))}>

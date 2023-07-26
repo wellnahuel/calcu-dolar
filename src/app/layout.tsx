@@ -1,8 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Quicksand } from 'next/font/google'
 
-const inter = Inter({ subsets: ["latin"] });
+const quicksand = Quicksand({ 
+  subsets: ["latin"],
+  weight: "400", 
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,10 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
-        <main className="flex h-screen items-center justify-center bg-sky-100 ">
+      <body className={`${quicksand.className} `}>
+        <main className="flex h-screen  items-center justify-center bg-site bg-cover text-white ">
           <div className="max-w-screen-lg mx-auto max-h-[480px]  flex-1 px-4">
-            <div className="w-full h-full placeholder:rounded-3xl bg-white shadow-lg p-8 ">
+            <div className=" h-full placeholder:rounded-3xl bg-black shadow-lg p-8 ">
               {children}
             </div>
           </div>
