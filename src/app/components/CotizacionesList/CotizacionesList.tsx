@@ -1,25 +1,38 @@
-import { getCotizacion } from '@/app/data/services';
-import { CasaType } from '@/app/models/cotizaciones.model';
-import React from 'react'
+import { getCotizacion } from "@/app/data/services";
+import { CasaType } from "@/app/models/cotizaciones.model";
+import React from "react";
 
 interface Props {
-    lista: {
-      casa:CasaType
-    }[];
+  lista: {
+    casa: CasaType;
+  }[];
 }
 
 function CotizacionesList({ lista }: Props) {
-
   return (
-    <div>
-         {lista.length > 0 && lista.map((t) => (
-            <p key={t.casa.agencia}>{t.casa.nombre} {t.casa.venta}</p>            
-        ))} 
+    <div className="flex justify-between">
+      <div>
+        {lista.length > 0 &&
+          lista.map((t) => <p key={t.casa.agencia}>{t.casa.nombre} </p>)}
+      </div>
+      <div>
+        {lista.length > 0 &&
+          lista.map((t) => (
+            <p key={t.casa.agencia}>Compra: $ {t.casa.compra} </p>
+          ))}
+      </div>
+      
+      <div>
+        {lista.length > 0 &&
+          lista.map((t) => (
+            <p key={t.casa.agencia}>Venta: $ {t.casa.venta} </p>
+          ))}
+      </div>
     </div>
-  )
+  );
 }
 
-export default CotizacionesList
+export default CotizacionesList;
 
 /* [
 {
@@ -123,4 +136,3 @@ export default CotizacionesList
 }
 }
 ] */
-

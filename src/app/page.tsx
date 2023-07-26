@@ -31,7 +31,13 @@ function Home() {
   }, []);
 
   return (
-    <main>      
+    <main className="">  
+      <section className=" flex-1">
+        <Form
+          value={amount}
+          onChange={(_amount: number) => setAmount(_amount)}
+        />
+      </section>    
       {data && <div>
         <CotizacionesList lista={data} />
       </div>}
