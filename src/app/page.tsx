@@ -17,15 +17,19 @@ import { getCotizacion } from "./data/services/cotizaciones.service";
 //
 
 
- function Home() {
+function Home() {
   const [amount, setAmount] = useState(0);  
-  const data =  getCotizacion();
-  useEffect (() => {
-    if (data) {
-      console.log(data)
-      setAmount(data)
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+        const result = await getCotizacion();
+        setData(result);
     }
-  }, [data])
+
+    fetchData();
+  }, []);
+
   return (
     <main>      
       {data && <div>

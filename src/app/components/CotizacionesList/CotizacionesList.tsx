@@ -8,12 +8,11 @@ interface Props {
     }[];
 }
 
-async function CotizacionesList({ lista }: Props) {
-  const data = await getCotizacion()
- // console.log(lista)
+function CotizacionesList({ lista }: Props) {
+
   return (
     <div>
-         {lista?.map((t) => (
+         {lista.length > 0 && lista.map((t) => (
             <p key={t.casa.agencia}>{t.casa.nombre} {t.casa.venta}</p>            
         ))} 
     </div>
