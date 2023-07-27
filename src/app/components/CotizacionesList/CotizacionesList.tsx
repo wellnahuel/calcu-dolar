@@ -16,14 +16,30 @@ function CotizacionesList({ lista }: Props) {
   useEffect(() => {
     async function fetchData() {
       const result = await getCotizacion();
+      console.log("soy el result", result);
       setData(result);
     }
-
     fetchData();
   }, []);
 
+  console.log("soy el form", amount); //chequeo que el form ande
+  console.log("soy lista", lista);
+
+  const calcularConversion = (valorVenta:string) => {
+    //console.log(typeof(amount))
+    console.log(amount + valorVenta);
+    if (parseInt(valorVenta) != 0) {
+      //console.log(valorVenta)
+      //console.log(typeof(Number(valorVenta)))
+      // console.log(amount)
+      const conversion = amount/parseInt(valorVenta);
+      //console.log(conversion)
+      return conversion.toFixed(2);
+    } else return 0
+  };
+
   return (
-    <div >
+    <div>
       <section className=" flex-1">
         <Form
           value={amount}
@@ -32,31 +48,29 @@ function CotizacionesList({ lista }: Props) {
       </section>
       <div className="flex justify-around max-[750px]:text-[80%] max-[600px]:w-[98%] max-[580px]:text-[60%]">
         <div>
+          Tipo de Dolar
           {lista.length > 0 &&
             lista.map((t) => <p key={t.casa.agencia}>{t.casa.nombre} </p>)}
         </div>
         <div>
+          Compra
           {lista.length > 0 &&
             lista.map((t) => (
-              <div className="flex">
-                <div key={t.casa.agencia} className="max-[500px]:hidden">Compra:</div>
-                <div key={t.casa.agencia}>  $ {t.casa.compra} </div>
+              <div>
+                {/*<div key={t.casa.agencia} className="max-[500px]:hidden">Compra:</div> */}
+                <div key={t.casa.agencia}> $ {t.casa.compra} </div>
               </div>
-              
-
             ))}
-        </div> 
+        </div>
+        <div>
+          Venta
+          {lista.length > 0 &&
+            lista.map((t) => <p key={t.casa.agencia}> $ {t.casa.venta} </p>)}
+        </div>
         <div>
           {lista.length > 0 &&
             lista.map((t) => (
-              <p key={t.casa.agencia}>Venta: $ {t.casa.venta} </p>
-            ))}
-        </div>
-         <div>
-        {lista.length > 0 &&
-            lista.map((t) => (
-              
-              <p key={t.casa.agencia}> $XXX.XX</p>
+              <p key={t.casa.agencia}> {calcularConversion(t.casa.venta)}</p>
             ))}
         </div>
       </div>
